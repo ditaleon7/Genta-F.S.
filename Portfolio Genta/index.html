@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Genta Fhany Saputra</title>
+<meta name="description" content="Portofolio Genta Fhany Saputra, tenaga administrasi — pengelolaan fasilitas, layanan, dan kolaborasi tim.">
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<!-- Lapisan animasi alam (kunang-kunang mengambang) — dirender oleh js/script.js -->
+<canvas id="natureCanvas" aria-hidden="true"></canvas>
+
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar">
+  <div class="container">
+    <a href="#beranda" class="nav-logo">Genta Fhany S<strong>.</strong></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#beranda" class="nav-link">Beranda</a></li>
+      <li><a href="#tentang" class="nav-link">Tentang</a></li>
+      <li><a href="#keahlian" class="nav-link">Keahlian</a></li>
+      <li><a href="#pengalaman" class="nav-link">Pengalaman</a></li>
+      <li><a href="#kontak" class="nav-link">Kontak</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ KONTEN 1 — HERO ============ -->
+<header class="hero" id="beranda">
+  <svg class="contour-bg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#6EF2A6" stroke-opacity="0.10" stroke-width="1.4">
+      <path d="M-50 620 C 200 560, 320 660, 520 600 S 900 520, 1250 590"/>
+      <path d="M-50 670 C 220 610, 340 700, 540 650 S 920 570, 1250 640"/>
+      <path d="M-50 720 C 240 660, 360 740, 560 700 S 940 620, 1250 690"/>
+      <path d="M-50 500 C 180 430, 300 540, 480 470 S 860 400, 1250 470"/>
+      <path d="M-50 440 C 170 380, 290 470, 460 410 S 830 350, 1250 410"/>
+    </g>
+  </svg>
+
+  <div class="hero-inner">
+
+    <div class="hero-name-stack reveal" data-reveal>
+      <span class="hero-name-behind">GENTA FHANY</span>
+
+      <div class="hero-photo-wrap">
+        <img src="./image/foto2.jpeg" alt="Genta Fhany Saputra di puncak Gunung Rinjani, 3726 MDPL">
+        <span class="altitude">RINJANI · 3726 MDPL</span>
+      </div>
+
+      <span class="hero-name-front">SAPUTRA</span>
+    </div>
+
+    <p class="hero-role reveal" data-reveal>Tenaga Administrasi &amp; Pengelolaan Fasilitas</p>
+    <div class="hero-actions reveal" data-reveal>
+      <a href="./CV/CV_Genta_Fhany_Saputra.pdf" class="btn btn-primary" download>Download CV</a>
+      <a href="#tentang" class="btn btn-ghost">Tentang Saya</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ KONTEN 2 — TENTANG SAYA ============ -->
+<section class="about" id="tentang">
+  <div class="container">
+    <span class="eyebrow">Profil</span>
+    <h2 class="section-title">Tentang Saya</h2>
+
+    <div class="about-grid">
+      <div class="about-photo reveal" data-reveal>
+        <span class="tag">Ruang Kerja</span>
+        <img src="./image/foto1.jpeg" alt="Genta Fhany Saputra bekerja di meja kantor">
+      </div>
+
+      <div class="about-text reveal" data-reveal>
+        <p class="lead">Lulusan Pendidikan Guru Sekolah Dasar, Universitas Mataram.</p>
+        <p>Saya memiliki kemampuan komunikasi yang baik dan terbiasa bekerja dalam tim. Saat ini aktif mengelola dan memastikan fasilitas kantor berfungsi dengan baik, mulai dari pemeliharaan hingga penanganan keluhan pengguna — pekerjaan yang menuntut ketelitian, tanggung jawab, dan inisiatif yang sama seperti saat saya menyusun rencana pendakian ke puncak tertinggi.</p>
+        <p>Siap memberikan kontribusi terbaik untuk mendukung kinerja dan layanan di lingkungan kerja.</p>
+
+        <div class="about-meta">
+          <div>
+            <span class="label">Pendidikan</span>
+            <span class="value">PGSD, Universitas Mataram (2019–2025) · IPK 3.55/4.00</span>
+          </div>
+          <div>
+            <span class="label">Fokus</span>
+            <span class="value">Administrasi, Layanan &amp; Pengelolaan Fasilitas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KONTEN 3 — KEAHLIAN ============ -->
+<section id="keahlian">
+  <div class="container skills-head">
+    <span class="eyebrow">Berkas Keahlian</span>
+    <h2 class="section-title">Keahlian</h2>
+    <p class="section-sub">Ditata seperti berkas kerja — rapi, terdokumentasi, dan siap dipakai kapan saja.</p>
+
+    <div class="skills-grid">
+
+      <article class="skill-doc reveal" data-reveal>
+        <div class="doc-top">
+          <div class="icon-frame"><img src="./icon/excel.svg" alt="Ikon Microsoft Excel"></div>
+          <span class="doc-index">DOC · 01</span>
+        </div>
+        <h4>Microsoft Excel</h4>
+        <p>Pengolahan data, rekap, dan tabulasi laporan administrasi.</p>
+        <div class="doc-lines"><span></span><span></span><span></span></div>
+      </article>
+
+      <article class="skill-doc reveal" data-reveal>
+        <div class="doc-top">
+          <div class="icon-frame"><img src="./icon/word.svg" alt="Ikon Microsoft Word"></div>
+          <span class="doc-index">DOC · 02</span>
+        </div>
+        <h4>Microsoft Word</h4>
+        <p>Penyusunan surat, laporan, dan dokumen kedinasan.</p>
+        <div class="doc-lines"><span></span><span></span><span></span></div>
+      </article>
+
+      <article class="skill-doc reveal" data-reveal>
+        <div class="doc-top">
+          <div class="icon-frame"><img src="./icon/canva.svg" alt="Ikon Canva"></div>
+          <span class="doc-index">DOC · 03</span>
+        </div>
+        <h4>Canva</h4>
+        <p>Desain materi informasi, poster, dan publikasi sederhana.</p>
+        <div class="doc-lines"><span></span><span></span><span></span></div>
+      </article>
+
+      <article class="skill-doc reveal" data-reveal>
+        <div class="doc-top">
+          <div class="icon-frame"><img src="./icon/capcut.svg" alt="Ikon CapCut"></div>
+          <span class="doc-index">DOC · 04</span>
+        </div>
+        <h4>CapCut</h4>
+        <p>Penyuntingan video dokumentasi kegiatan dan konten promosi.</p>
+        <div class="doc-lines"><span></span><span></span><span></span></div>
+      </article>
+
+      <article class="skill-doc reveal" data-reveal>
+        <div class="doc-top">
+          <div class="icon-frame icon-glyph">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
+          </div>
+          <span class="doc-index">DOC · 05</span>
+        </div>
+        <h4>Manajemen Waktu</h4>
+        <p>Menyusun prioritas kerja agar tugas selesai tepat waktu.</p>
+        <div class="doc-lines"><span></span><span></span><span></span></div>
+      </article>
+
+      <article class="skill-doc reveal" data-reveal>
+        <div class="doc-top">
+          <div class="icon-frame icon-glyph">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <span class="doc-index">DOC · 06</span>
+        </div>
+        <h4>Kolaborasi</h4>
+        <p>Bekerja sama lintas tim untuk mendukung kelancaran layanan.</p>
+        <div class="doc-lines"><span></span><span></span><span></span></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ KONTEN 4 — PENGALAMAN KERJA ============ -->
+<section class="experience" id="pengalaman">
+  <div class="container">
+    <span class="eyebrow">Riwayat</span>
+    <h2 class="section-title">Pengalaman</h2>
+    <p class="section-sub">Jejak kerja dan kegiatan, disusun seperti arsip surat kedinasan.</p>
+
+    <div class="timeline">
+
+      <div class="timeline-item is-current reveal" data-reveal>
+        <div class="timeline-card">
+          <span class="timeline-period">November 2025 — Mei 2026</span>
+          <h3>Pengelola Fasilitas Umum (Intern)</h3>
+          <span class="org">Kanwil Direktorat Jenderal Imigrasi NTB · Mataram, NTB</span>
+          <ul>
+            <li>Bertanggung jawab mengelola, merawat, dan memastikan seluruh fasilitas kantor berfungsi dengan baik.</li>
+            <li>Melakukan pemeliharaan, perbaikan, dan penanganan keluhan pengguna.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal" data-reveal>
+        <div class="timeline-card">
+          <span class="timeline-period">Agustus 2025 — November 2025</span>
+          <h3>Marketing Digital dan Sales</h3>
+          <span class="org">MPM Motor Mataram · Mataram, NTB</span>
+          <ul>
+            <li>Menawarkan promo, kredit, dan simulasi pembiayaan kepada calon pelanggan.</li>
+            <li>Membuat dan menjalankan campaign promosi produk.</li>
+            <li>Membangun branding dan engagement dengan pelanggan.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal" data-reveal>
+        <div class="timeline-card">
+          <span class="timeline-period">November 2025</span>
+          <h3>Volunteer — Race To Selo X SELOOTPRINTS FOUNDATION</h3>
+          <span class="org">Kepanitiaan Volunteer · Selong Belanak, Lombok Tengah</span>
+          <ul>
+            <li>Berperan aktif memastikan kelancaran lomba lari dari titik start hingga finish.</li>
+            <li>Menjaga keamanan pelari di rute yang ditentukan, memberi arahan di titik persimpangan, dan memastikan peserta mengikuti jalur yang benar.</li>
+            <li>Membantu koordinasi dengan tim keselamatan dan logistik untuk menanggapi kebutuhan darurat peserta di lapangan.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ KONTEN 5 — KONTAK ============ -->
+<section id="kontak">
+  <svg class="contour-bg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#6EF2A6" stroke-opacity="0.08" stroke-width="1.4">
+      <path d="M-50 150 C 220 90, 340 190, 540 130 S 920 60, 1250 130"/>
+      <path d="M-50 200 C 240 140, 360 230, 560 180 S 940 110, 1250 180"/>
+    </g>
+  </svg>
+
+  <div class="container">
+    <span class="eyebrow">Sampai Jumpa</span>
+    <h2 class="section-title">Kontak</h2>
+    <p class="section-sub">Terbuka untuk peluang kerja maupun sekadar berkenalan. Silakan hubungi melalui:</p>
+
+    <div class="contact-grid">
+
+      <a class="contact-card reveal" data-reveal href="mailto:gentasyahputra123@gmail.com">
+        <span class="c-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+        </span>
+        <span class="c-label">Email</span>
+        <span class="c-value">gentasyahputra123@gmail.com</span>
+      </a>
+
+      <a class="contact-card reveal" data-reveal href="https://wa.me/6285238736932" target="_blank" rel="noopener">
+        <span class="c-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </span>
+        <span class="c-label">WhatsApp</span>
+        <span class="c-value">+62 852-3873-6932</span>
+      </a>
+
+      <a class="contact-card reveal" data-reveal href="https://www.instagram.com/genta.fs/" target="_blank" id="instagramLink">
+        <span class="c-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg>
+        </span>
+        <span class="c-label">Instagram</span>
+        <span class="c-value">Genta Fhany Saputra</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <svg class="contour-bg footer-contour" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#6EF2A6" stroke-opacity="0.10" stroke-width="1.4">
+      <path d="M-50 60 C 200 10, 320 100, 520 50 S 900 -10, 1250 50"/>
+      <path d="M-50 100 C 220 50, 340 130, 540 90 S 920 30, 1250 90"/>
+    </g>
+  </svg>
+
+  <div class="container footer-inner">
+    <p>&copy; 2026 Genta Fhany Saputra — Mataram, Nusa Tenggara Barat.</p>
+  </div>
+</footer>
+
+<!-- Tombol kembali ke atas, muncul saat halaman discroll -->
+<button id="backToTop" class="back-to-top-btn" aria-label="Kembali ke atas">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+</button>
+
+<script src="./js/script.js"></script>
+</body>
+</html>

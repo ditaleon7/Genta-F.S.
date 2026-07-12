@@ -1,0 +1,894 @@
+/* =============================================================
+   PORTFOLIO — GENTA FHANY SAPUTRA
+   Tema: Administrasi x Alam ("Berkas di Rimba")
+   ============================================================= */
+
+:root{
+  /* --- Warna --- */
+  --bg:            #0C2318;   /* Hijau hutan gelap / deep forest */
+  --bg-soft:       #112B1D;
+  --bg-elev:       #163724;
+  --bg-elev-2:     #1D4530;
+  --line:          rgba(233,237,234,0.12);
+  --line-strong:   rgba(233,237,234,0.22);
+
+  --text:          #EAEEEA;   /* abu-abu sangat muda */
+  --text-muted:    #AEC0B4;
+  --text-faint:    #7E9689;
+
+  --accent:        #6EF2A6;   /* hijau mint terang */
+  --accent-strong: #3FE28C;
+  --accent-soft:   rgba(110,242,166,0.12);
+  --accent-line:   rgba(110,242,166,0.35);
+
+  --stamp:         #C98A4B;   /* aksen "tinta cap" sekunder, dipakai tipis */
+
+  /* --- Tipografi --- */
+  --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+  --font-body:    'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:    'Courier New', Courier, monospace;
+
+  /* --- Layout --- */
+  --maxw: 1120px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  *, *::before, *::after{
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html{
+  background: var(--bg);
+  height: 100%;
+}
+
+body{
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Lapisan animasi alam (kunang-kunang) — mengikuti ukuran layar (viewport), BUKAN tinggi dokumen */
+#natureCanvas{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce){
+  #natureCanvas{ display: none; }
+}
+
+img{ max-width: 100%; display: block; }
+
+a{
+  color: var(--accent);
+  text-decoration: none;
+}
+
+h1, h2, h3, h4{
+  font-family: var(--font-display);
+  font-weight: 700;
+  margin: 0;
+  color: var(--text);
+}
+
+p{ margin: 0; }
+
+.container{
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+section{
+  position: relative;
+  padding: 120px 0;
+  overflow: hidden;
+}
+
+.eyebrow{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+.eyebrow::before{
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.section-title{
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+}
+
+.section-sub{
+  color: var(--text-muted);
+  max-width: 560px;
+  font-size: 16px;
+}
+
+/* --- Kontur / tekstur latar (motif gunung, tema alam) --- */
+.contour-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.contour-bg g{
+  animation: contourDrift 26s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+@keyframes contourDrift{
+  0%   { transform: translateX(-18px) translateY(0); }
+  50%  { transform: translateX(14px) translateY(-6px); }
+  100% { transform: translateX(-8px) translateY(4px); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .contour-bg g{ animation: none; }
+}
+
+/* =============================================================
+   NAVIGASI
+   ============================================================= */
+.navbar{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(12, 35, 24, 0.82);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.navbar .container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.nav-logo{
+  font-family: var(--font-mono);
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  color: var(--text);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.nav-logo strong{ color: var(--accent); }
+
+.nav-links{
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a{
+  color: var(--text-muted);
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  position: relative;
+  padding: 6px 0;
+  transition: color 0.25s ease;
+}
+.nav-links a::after{
+  content:'';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0%;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.25s ease;
+}
+.nav-links a:hover,
+.nav-links a.active{
+  color: var(--text);
+}
+.nav-links a:hover::after,
+.nav-links a.active::after{
+  width: 100%;
+}
+
+.nav-toggle{
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.nav-toggle span{
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.nav-toggle.is-open span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+.nav-toggle.is-open span:nth-child(2){ opacity: 0; }
+.nav-toggle.is-open span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+
+/* =============================================================
+   HERO — KONTEN 1
+   ============================================================= */
+.hero{
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 0 80px;
+  overflow: hidden;
+}
+
+.hero-inner{
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 30px;
+}
+
+/* --- Tumpukan nama berlapis (layered typography) di belakang/depan foto --- */
+.hero-name-stack{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1px;
+}
+
+.hero-photo-wrap{
+  position: relative;
+  width: min(210px, 44vw);
+  aspect-ratio: 3 / 4;
+  z-index: 2;
+  margin: -0.28em 0;
+}
+
+.hero-photo-wrap img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 4px solid var(--accent);
+  box-shadow: 0 0 0 1px var(--bg), 0 18px 40px -12px rgba(0,0,0,0.55);
+}
+
+.hero-photo-wrap .altitude{
+  position: absolute;
+  bottom: -14px;
+  right: -10px;
+  background: var(--bg-elev);
+  border: 1px solid var(--accent-line);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  padding: 6px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  z-index: 3;
+}
+
+.hero-name-behind,
+.hero-name-front{
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(30px, 7vw, 54px);
+  letter-spacing: -0.01em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.hero-name-behind{
+  position: relative;
+  z-index: 1;
+  color: var(--text);
+  opacity: 0.32;
+}
+
+.hero-name-front{
+  position: relative;
+  z-index: 3;
+  color: var(--text);
+}
+
+.hero-role{
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.hero-tagline{
+  max-width: 520px;
+  color: var(--text-muted);
+  font-size: 16px;
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.hero-actions{
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+/* Tombol */
+.btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 13px 26px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.btn-primary{
+  background: var(--accent);
+  color: #0C2318;
+}
+.btn-primary:hover{
+  background: var(--accent-strong);
+  transform: translateY(-2px);
+}
+.btn-ghost{
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--text);
+}
+.btn-ghost:hover{
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* =============================================================
+   TENTANG SAYA — KONTEN 2
+   ============================================================= */
+.about{
+  background: var(--bg-soft);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.about .container{
+  position: relative;
+  z-index: 1;
+}
+
+.about-grid{
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 64px;
+  align-items: start;
+  margin-top: 56px;
+}
+
+.about-photo{
+  position: relative;
+  width: min(320px, 78%);
+}
+
+.about-photo img{
+  width: 100%;
+  border-radius: var(--radius-lg);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: top center;
+  border: 4px solid var(--accent);
+  box-shadow: 0 0 0 1px var(--bg-soft), 0 18px 40px -14px rgba(0,0,0,0.55);
+}
+
+.about-photo .tag{
+  position: absolute;
+  top: -14px;
+  left: -14px;
+  background: var(--bg-elev);
+  border: 1px solid var(--accent-line);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  z-index: 2;
+}
+
+.about-text p{
+  color: var(--text-muted);
+  font-size: 16.5px;
+  margin-bottom: 18px;
+}
+.about-text p:last-child{ margin-bottom: 0; }
+.about-text .lead{
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 21px;
+  line-height: 1.55;
+  margin-bottom: 22px;
+}
+
+.about-meta{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 30px;
+  padding-top: 26px;
+  border-top: 1px dashed var(--line-strong);
+}
+.about-meta div span{
+  display: block;
+}
+.about-meta .label{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 4px;
+}
+.about-meta .value{
+  font-size: 14.5px;
+  color: var(--text);
+}
+
+/* =============================================================
+   KEAHLIAN — KONTEN 3 (gaya berkas/dokumen)
+   ============================================================= */
+.skills-head{
+  position: relative;
+  z-index: 1;
+}
+
+.skills-grid{
+  position: relative;
+  z-index: 1;
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.skill-doc{
+  position: relative;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 26px 22px 22px;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+
+.skill-doc::before{
+  /* tab folder di atas kartu */
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: 22px;
+  width: 46px;
+  height: 9px;
+  background: var(--bg-elev-2);
+  border-radius: 4px 4px 0 0;
+  border: 1px solid var(--line);
+  border-bottom: none;
+}
+
+.skill-doc:hover{
+  transform: translateY(-4px);
+  border-color: var(--accent-line);
+  background: var(--bg-elev-2);
+}
+
+.skill-doc .doc-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.skill-doc .icon-frame{
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.skill-doc .icon-frame img,
+.skill-doc .icon-frame svg{
+  width: 100%;
+  height: 100%;
+}
+
+.skill-doc .doc-index{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  letter-spacing: 0.06em;
+}
+
+.skill-doc h4{
+  font-size: 17px;
+  margin-bottom: 6px;
+}
+
+.skill-doc p{
+  color: var(--text-muted);
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.skill-doc .doc-lines{
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.skill-doc .doc-lines span{
+  display: block;
+  height: 1px;
+  background: var(--line);
+}
+.skill-doc .doc-lines span:nth-child(1){ width: 100%; }
+.skill-doc .doc-lines span:nth-child(2){ width: 80%; }
+.skill-doc .doc-lines span:nth-child(3){ width: 55%; }
+
+.icon-glyph{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elev-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--accent);
+}
+.icon-glyph svg{ width: 22px; height: 22px; }
+
+/* =============================================================
+   PENGALAMAN — KONTEN 4 (gaya lini masa / berkas surat)
+   ============================================================= */
+.experience{
+  background: var(--bg-soft);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.timeline{
+  position: relative;
+  margin-top: 56px;
+  padding-left: 40px;
+}
+
+.timeline::before{
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: linear-gradient(var(--accent-line), var(--line) 85%);
+}
+
+.timeline-item{
+  position: relative;
+  padding-bottom: 46px;
+  opacity: 0;
+  transform: translateY(18px);
+}
+.timeline-item:last-child{ padding-bottom: 0; }
+
+.timeline-item::before{
+  content: '';
+  position: absolute;
+  left: -40px;
+  top: 4px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+}
+
+.timeline-item.is-current::before{
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.timeline-card{
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 26px 28px;
+}
+
+.timeline-period{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+.timeline-card h3{
+  font-size: 19px;
+  margin-bottom: 3px;
+}
+
+.timeline-card .org{
+  color: var(--text-muted);
+  font-size: 14px;
+  font-style: italic;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.timeline-card ul{
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-muted);
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+.timeline-card ul li::marker{
+  color: var(--accent);
+}
+.timeline-card ul li + li{ margin-top: 4px; }
+
+/* =============================================================
+   KONTAK — KONTEN 5
+   ============================================================= */
+.contact-grid{
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-card{
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+.contact-card:hover{
+  transform: translateY(-4px);
+  border-color: var(--accent-line);
+  background: var(--bg-elev-2);
+}
+
+.contact-card .c-icon{
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  color: var(--accent);
+}
+.contact-card .c-icon svg{ width: 20px; height: 20px; }
+
+.contact-card .c-label{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.contact-card .c-value{
+  font-size: 14.5px;
+  color: var(--text);
+  word-break: break-word;
+}
+
+.contact-card a.c-value:hover{
+  color: var(--accent);
+}
+
+.site-footer{
+  position: relative;
+  margin-top: auto;
+  padding: 25px 0;
+  background: var(--bg-soft);
+  border-top: 1px solid var(--line);
+  overflow: hidden;
+  text-align: center;
+}
+
+.footer-contour{ opacity: 0.7; }
+
+.footer-inner{
+  position: relative;
+  z-index: 1;
+}
+
+.footer-inner p{
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+/* Tombol kembali ke atas — mengambang, muncul saat discroll */
+.back-to-top-btn{
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #0C2318;
+  border: none;
+  cursor: pointer;
+  z-index: 90;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease, background 0.2s ease;
+  box-shadow: 0 10px 24px -8px rgba(0,0,0,0.5);
+}
+.back-to-top-btn svg{ width: 20px; height: 20px; }
+
+.back-to-top-btn.is-visible{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top-btn:hover{
+  background: var(--accent-strong);
+  transform: translateY(-3px);
+}
+
+@media (max-width: 640px){
+  .back-to-top-btn{
+    right: 16px;
+    bottom: 16px;
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* =============================================================
+   REVEAL ANIMATION (JS toggles .is-visible)
+   ============================================================= */
+.reveal{
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.is-visible{
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* =============================================================
+   RESPONSIVE
+   ============================================================= */
+@media (max-width: 900px){
+  .about-grid{ grid-template-columns: 1fr; gap: 40px; }
+  .about-photo{ width: min(220px, 60%); }
+  .skills-grid{ grid-template-columns: repeat(2, 1fr); }
+  .contact-grid{ grid-template-columns: repeat(2, 1fr); }
+  section{ padding: 90px 0; }
+}
+
+@media (max-width: 640px){
+  .nav-links{
+    position: fixed;
+    top: 72px;
+    left: 0; right: 0;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .nav-links.is-open{ max-height: 320px; }
+  .nav-links li{ width: 100%; }
+  .nav-links a{
+    display: block;
+    padding: 16px 28px;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-toggle{ display: flex; }
+
+  .skills-grid{ grid-template-columns: 1fr; }
+  .contact-grid{ grid-template-columns: 1fr; }
+  .about-meta{ grid-template-columns: 1fr; }
+  .timeline{ padding-left: 30px; }
+  .timeline-item::before{ left: -30px; }
+  .hero-photo-wrap .altitude{ right: 0; }
+  .hero-name-behind,
+  .hero-name-front{
+    font-size: clamp(22px, 8vw, 34px);
+    white-space: normal;
+    text-align: center;
+  }
+  .hero-photo-wrap{ width: min(170px, 50vw); }
+}
+
+#kontak{
+    padding: 100px 0 50px;
+    border-bottom: none;
+}
